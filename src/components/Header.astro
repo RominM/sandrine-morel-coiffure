@@ -1,0 +1,87 @@
+---
+import { site } from '../config/site'
+---
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="/" class="header__logo">
+      <span class="header__logo-name">{site.name}</span>
+      <span class="header__logo-tagline">Coiffure</span>
+    </a>
+
+    <nav class="header__nav" aria-label="Navigation principale">
+      <a href="#prestations">Prestations</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#temoignages">Avis</a>
+      <a href="#a-propos">À propos</a>
+    </nav>
+
+    <a href="#contact" class="btn btn--primary header__cta">Prendre RDV</a>
+  </div>
+</header>
+
+<style lang="scss">
+  @use '../styles/foundations' as *;
+
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250, 245, 240, 0.94);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid $color-border;
+
+    &__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4.5rem;
+    }
+
+    &__logo {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+
+      &-name {
+        font-family: $font-heading;
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: $color-text;
+        font-style: italic;
+      }
+
+      &-tagline {
+        font-size: 0.75rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: $color-text-muted;
+      }
+    }
+
+    &__nav {
+      display: none;
+      gap: 2rem;
+
+      @include respond-to('md') {
+        display: flex;
+      }
+
+      a {
+        font-size: 0.85rem;
+        letter-spacing: 0.04em;
+        color: $color-text-muted;
+        transition: color $transition;
+
+        &:hover {
+          color: $color-accent-dark;
+        }
+      }
+    }
+
+    &__cta {
+      padding: 0.6rem 1.4rem;
+      font-size: 0.78rem;
+    }
+  }
+</style>

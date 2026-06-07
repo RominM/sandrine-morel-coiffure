@@ -1,1 +1,118 @@
 @use 'reset';
+@use 'foundations' as *;
+
+body {
+  background-color: $color-bg;
+  color: $color-text;
+  font-family: $font-sans;
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-heading;
+  font-weight: 500;
+  line-height: 1.2;
+  color: $color-text;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  @include container;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-family: $font-heading;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  color: $color-text-muted;
+  font-size: 1.05rem;
+  max-width: 520px;
+  margin-inline: auto;
+}
+
+.section-divider {
+  display: block;
+  width: 3rem;
+  height: 2px;
+  background: $color-secondary;
+  margin-inline: auto;
+  margin-bottom: 1rem;
+
+  &--left {
+    margin-inline: 0;
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  border-radius: $radius-pill;
+  font-family: $font-sans;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all $transition;
+  cursor: pointer;
+  border: 2px solid transparent;
+  white-space: nowrap;
+
+  &--primary {
+    background: $color-accent;
+    color: white;
+    border-color: $color-accent;
+
+    &:hover {
+      background: $color-accent-dark;
+      border-color: $color-accent-dark;
+      transform: translateY(-2px);
+      box-shadow: $shadow-md;
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    color: $color-accent;
+    border-color: $color-accent;
+
+    &:hover {
+      background: $color-accent;
+      color: white;
+    }
+  }
+
+  &--gold {
+    background: $color-secondary;
+    color: white;
+    border-color: $color-secondary;
+
+    &:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: $shadow-md;
+    }
+  }
+}

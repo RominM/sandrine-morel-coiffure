@@ -1,0 +1,90 @@
+---
+const photos = Array.from({ length: 8 }, (_, i) => ({ id: i + 1 }))
+---
+
+<section class="gallery" id="galerie">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-divider"></span>
+      <h2 class="section-title">Mes réalisations</h2>
+      <p class="section-subtitle">
+        Colorations végétales, coupes et soins — un aperçu de mon travail au quotidien.
+      </p>
+    </div>
+
+    <div class="gallery__grid">
+      {photos.map(p => (
+        <div class="gallery__item">
+          <div class="gallery__placeholder" aria-label={`Réalisation ${p.id}`}>
+            <span>Photo {p.id}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <p class="gallery__cta">
+      Suivez mes créations sur Instagram —
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="gallery__insta-link">
+        @sandrine.coiffure
+      </a>
+    </p>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/foundations' as *;
+
+  .gallery {
+    background: $color-bg;
+    padding-block: $section-padding;
+
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+
+      @include respond-to('md') {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    &__item {
+      aspect-ratio: 1;
+      border-radius: $radius-md;
+      overflow: hidden;
+    }
+
+    &__placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, $color-accent-bg 0%, $color-secondary-bg 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $color-text-muted;
+      font-size: 0.82rem;
+      transition: transform $transition;
+
+      &:hover {
+        transform: scale(1.03);
+      }
+    }
+
+    &__cta {
+      text-align: center;
+      margin-top: 2rem;
+      color: $color-text-muted;
+      font-size: 0.95rem;
+    }
+
+    &__insta-link {
+      color: $color-accent-dark;
+      font-weight: 600;
+      transition: color $transition;
+
+      &:hover {
+        color: $color-secondary;
+      }
+    }
+  }
+</style>

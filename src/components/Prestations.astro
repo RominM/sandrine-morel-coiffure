@@ -1,0 +1,123 @@
+---
+const prestations = [
+  {
+    name: 'Coupe femme',
+    desc: 'Coupe personnalisée adaptée à votre visage, votre style et votre mode de vie.',
+    price: 'à partir de 35 €'
+  },
+  {
+    name: 'Coloration végétale',
+    desc: 'Couleurs lumineuses et durables, sans ammoniaque ni résorcinol. Douce pour vos cheveux et pour la planète.',
+    price: 'à partir de 60 €'
+  },
+  {
+    name: 'Balayage & mèches',
+    desc: 'Effet soleil naturel ou contraste affirmé — un éclat sur-mesure selon vos envies.',
+    price: 'à partir de 55 €'
+  },
+  {
+    name: 'Soin & brillance',
+    desc: 'Masques nourrissants et soins kératine pour une chevelure lumineuse et revitalisée.',
+    price: 'à partir de 25 €'
+  },
+  {
+    name: 'Brushing',
+    desc: 'Mise en forme et volume pour une finition soignée, à toute occasion.',
+    price: 'à partir de 20 €'
+  },
+  {
+    name: 'Forfait coupe + couleur',
+    desc: 'Coupe et coloration végétale réunies pour un résultat complet et harmonieux.',
+    price: 'à partir de 85 €'
+  },
+]
+---
+
+<section class="prestations" id="prestations">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-divider"></span>
+      <h2 class="section-title">Mes prestations</h2>
+      <p class="section-subtitle">
+        Chaque prestation est réalisée avec soin, dans un cadre chaleureux,
+        sur rendez-vous uniquement.
+      </p>
+    </div>
+
+    <div class="prestations__grid">
+      {prestations.map(p => (
+        <div class="prestations__card">
+          <h3 class="prestations__name">{p.name}</h3>
+          <p class="prestations__desc">{p.desc}</p>
+          <p class="prestations__price">{p.price}</p>
+        </div>
+      ))}
+    </div>
+
+    <p class="prestations__note">
+      Tarifs indicatifs — un devis précis est établi lors de la prise de rendez-vous.
+    </p>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/foundations' as *;
+
+  .prestations {
+    background: $color-bg-alt;
+    padding-block: $section-padding;
+
+    &__grid {
+      display: grid;
+      gap: 1.25rem;
+
+      @include respond-to('md') {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include respond-to('lg') {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    &__card {
+      @include card;
+      background: white;
+      transition: transform $transition, box-shadow $transition;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: $shadow-md;
+      }
+    }
+
+    &__name {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: $color-text;
+      margin-bottom: 0.5rem;
+    }
+
+    &__desc {
+      font-size: 0.9rem;
+      color: $color-text-muted;
+      line-height: 1.65;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    &__price {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: $color-secondary;
+    }
+
+    &__note {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-size: 0.85rem;
+      color: $color-text-subtle;
+      font-style: italic;
+    }
+  }
+</style>

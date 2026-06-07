@@ -1,0 +1,95 @@
+---
+import { site } from '../config/site'
+const year = new Date().getFullYear()
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <p class="footer__name">{site.name} Coiffure</p>
+      <p class="footer__location">Salon à domicile — Béziers (34500)</p>
+    </div>
+
+    <nav class="footer__nav" aria-label="Navigation pied de page">
+      <a href="#prestations">Prestations</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#temoignages">Avis</a>
+      <a href="#a-propos">À propos</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <p class="footer__copy">
+      &copy; {year} {site.name} Coiffure &mdash; Site par
+      <a href="https://mgl-studio.fr" target="_blank" rel="noopener">MGL Studio</a>
+    </p>
+  </div>
+</footer>
+
+<style lang="scss">
+  @use '../styles/foundations' as *;
+
+  .footer {
+    background: $color-text;
+    color: rgba(250, 245, 240, 0.5);
+    padding-block: 2.5rem;
+
+    &__inner {
+      display: grid;
+      gap: 1.5rem;
+      text-align: center;
+
+      @include respond-to('md') {
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        text-align: left;
+      }
+    }
+
+    &__name {
+      font-family: $font-heading;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: rgba(250, 245, 240, 0.9);
+      margin-bottom: 0.2rem;
+    }
+
+    &__location {
+      font-size: 0.8rem;
+    }
+
+    &__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      justify-content: center;
+
+      a {
+        font-size: 0.82rem;
+        letter-spacing: 0.04em;
+        transition: color $transition;
+
+        &:hover {
+          color: $color-accent;
+        }
+      }
+    }
+
+    &__copy {
+      font-size: 0.78rem;
+
+      @include respond-to('md') {
+        text-align: right;
+      }
+
+      a {
+        color: $color-accent;
+        font-weight: 600;
+        transition: color $transition;
+
+        &:hover {
+          color: white;
+        }
+      }
+    }
+  }
+</style>
