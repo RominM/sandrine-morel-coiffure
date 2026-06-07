@@ -1,0 +1,160 @@
+---
+---
+
+<section class="about" id="a-propos">
+  <div class="container">
+    <div class="about__inner">
+      <div class="about__visual">
+        <div class="about__image-placeholder" aria-hidden="true">
+          <span>Photo Sandrine</span>
+        </div>
+        <div class="about__signature" aria-hidden="true">
+          <span class="about__signature-name">Sandrine Morel</span>
+          <span class="about__signature-role">Coiffeuse indépendante</span>
+        </div>
+      </div>
+
+      <div class="about__content">
+        <span class="section-divider section-divider--left"></span>
+        <h2 class="about__title">Bienvenue dans mon univers</h2>
+
+        <p>
+          Je suis Sandrine, coiffeuse indépendante installée à Béziers.
+          Après des années en salon, j'ai créé un espace intimiste chez moi —
+          un cocon chaleureux où chaque cliente est reçue avec attention et bienveillance.
+        </p>
+
+        <p>
+          Ma spécialité&nbsp;? Les <strong>colorations végétales</strong>.
+          Des couleurs lumineuses et durables, sans ammoniaque, respectueuses
+          de vos cheveux et de votre santé.
+          Parce que prendre soin de soi ne devrait pas se faire au prix de compromis.
+        </p>
+
+        <p>
+          Je travaille uniquement sur rendez-vous, pour vous offrir le temps
+          et l'attention que vous méritez vraiment.
+        </p>
+
+        <div class="about__values">
+          <span class="about__value">
+            <span class="about__value-icon">✦</span>
+            Colorations végétales
+          </span>
+          <span class="about__value">
+            <span class="about__value-icon">✦</span>
+            Salon intimiste
+          </span>
+          <span class="about__value">
+            <span class="about__value-icon">✦</span>
+            Sur rendez-vous
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/foundations' as *;
+
+  .about {
+    background: $color-bg;
+    padding-block: $section-padding;
+
+    &__inner {
+      display: grid;
+      gap: 4rem;
+      align-items: center;
+
+      @include respond-to('lg') {
+        grid-template-columns: 1fr 1.2fr;
+      }
+    }
+
+    &__visual {
+      position: relative;
+    }
+
+    &__image-placeholder {
+      aspect-ratio: 3 / 4;
+      border-radius: $radius-lg;
+      background: linear-gradient(145deg, $color-accent-bg 0%, $color-secondary-bg 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $color-text-muted;
+      font-size: 0.9rem;
+    }
+
+    &__signature {
+      position: absolute;
+      bottom: -1rem;
+      right: -1rem;
+      background: white;
+      border: 1px solid $color-border;
+      border-radius: $radius-md;
+      padding: 0.85rem 1.25rem;
+      box-shadow: $shadow-sm;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    &__signature-name {
+      font-family: $font-heading;
+      font-size: 1.15rem;
+      font-style: italic;
+      font-weight: 500;
+      color: $color-text;
+    }
+
+    &__signature-role {
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      color: $color-text-muted;
+    }
+
+    &__title {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+
+    &__content p {
+      color: $color-text-muted;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+
+      strong {
+        color: $color-text;
+        font-weight: 600;
+      }
+    }
+
+    &__values {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.75rem;
+    }
+
+    &__value {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: $color-text;
+      background: $color-secondary-bg;
+      border: 1px solid rgba(197, 165, 90, 0.25);
+      border-radius: $radius-pill;
+      padding: 0.4rem 1rem;
+    }
+
+    &__value-icon {
+      color: $color-secondary;
+      font-size: 0.75rem;
+    }
+  }
+</style>

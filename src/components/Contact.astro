@@ -1,0 +1,228 @@
+---
+---
+
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-divider"></span>
+      <h2 class="section-title">Prendre rendez-vous</h2>
+      <p class="section-subtitle">
+        Remplissez le formulaire, je vous recontacte dans les 24h pour confirmer votre créneau.
+      </p>
+    </div>
+
+    <div class="contact__inner">
+      <form class="contact__form" id="contact-form" novalidate>
+        <div class="contact__field">
+          <label for="name">Prénom et nom *</label>
+          <input type="text" id="name" name="name" required autocomplete="name" />
+        </div>
+        <div class="contact__field">
+          <label for="phone">Téléphone *</label>
+          <input type="tel" id="phone" name="phone" required autocomplete="tel" />
+        </div>
+        <div class="contact__field">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required autocomplete="email" />
+        </div>
+        <div class="contact__field">
+          <label for="message">Votre demande (optionnel)</label>
+          <textarea id="message" name="message" rows="4" placeholder="Coloration, coupe, soin..."></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary contact__submit">
+          Envoyer ma demande
+        </button>
+        <p class="contact__status" id="contact-status" aria-live="polite"></p>
+      </form>
+
+      <div class="contact__sidebar">
+        <div class="contact__info-card">
+          <h3>Horaires</h3>
+          <p>Mardi – Samedi</p>
+          <p>9h00 – 12h00 &bull; 13h30 – 18h30</p>
+          <p class="contact__closed">Dimanche et lundi : fermé</p>
+        </div>
+        <div class="contact__info-card">
+          <h3>Localisation</h3>
+          <p>Salon à domicile — Béziers (34500)</p>
+          <p class="contact__note">L'adresse exacte est transmise lors de la confirmation de rendez-vous.</p>
+        </div>
+        <div class="contact__info-card contact__info-card--highlight">
+          <p>Sur rendez-vous uniquement — pas de passage sans rendez-vous, pas de déplacement à domicile.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null
+  const statusEl = document.getElementById('contact-status') as HTMLParagraphElement | null
+  const submitBtn = form?.querySelector<HTMLButtonElement>('[type="submit"]')
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    if (!submitBtn || !statusEl) return
+
+    submitBtn.disabled = true
+    submitBtn.textContent = 'Envoi en cours…'
+    statusEl.textContent = ''
+    statusEl.className = 'contact__status'
+
+    const data = Object.fromEntries(new FormData(form))
+
+    try {
+      const res = await fetch('/.netlify/functions/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) throw new Error()
+      statusEl.textContent = 'Demande envoyée ! Je vous recontacte dans les 24h.'
+      statusEl.classList.add('contact__status--ok')
+      form.reset()
+    } catch {
+      statusEl.textContent = 'Une erreur est survenue. Veuillez réessayer ou me contacter directement.'
+      statusEl.classList.add('contact__status--error')
+    } finally {
+      submitBtn.disabled = false
+      submitBtn.textContent = 'Envoyer ma demande'
+    }
+  })
+</script>
+
+<style lang="scss">
+  @use '../styles/foundations' as *;
+
+  .contact {
+    background: $color-secondary-bg;
+    padding-block: $section-padding;
+
+    &__inner {
+      display: grid;
+      gap: 3rem;
+
+      @include respond-to('lg') {
+        grid-template-columns: 1fr 360px;
+        gap: 4rem;
+      }
+    }
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    &__field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+
+      label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: $color-text;
+        letter-spacing: 0.01em;
+      }
+
+      input,
+      textarea {
+        font-family: $font-sans;
+        font-size: 0.95rem;
+        color: $color-text;
+        background: white;
+        border: 1.5px solid $color-border;
+        border-radius: $radius-md;
+        padding: 0.75rem 1rem;
+        transition: border-color $transition, box-shadow $transition;
+        outline: none;
+        resize: vertical;
+
+        &::placeholder {
+          color: $color-text-subtle;
+        }
+
+        &:focus {
+          border-color: $color-accent;
+          box-shadow: 0 0 0 3px rgba(212, 160, 165, 0.15);
+        }
+      }
+    }
+
+    &__submit {
+      align-self: flex-start;
+      margin-top: 0.5rem;
+    }
+
+    &__status {
+      font-size: 0.9rem;
+      padding: 0.75rem 1rem;
+      border-radius: $radius-md;
+      display: none;
+
+      &--ok {
+        display: block;
+        background: #F5E8E9;
+        color: #5C3538;
+      }
+
+      &--error {
+        display: block;
+        background: #FFF0F0;
+        color: #CC2222;
+      }
+    }
+
+    &__sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    &__info-card {
+      background: white;
+      border: 1px solid $color-border;
+      border-radius: $radius-md;
+      padding: 1.5rem;
+      box-shadow: $shadow-sm;
+
+      h3 {
+        font-family: $font-heading;
+        font-size: 1.15rem;
+        font-weight: 500;
+        margin-bottom: 0.6rem;
+        color: $color-text;
+      }
+
+      p {
+        font-size: 0.9rem;
+        color: $color-text-muted;
+        line-height: 1.6;
+      }
+
+      &--highlight {
+        background: $color-accent-bg;
+        border-color: rgba(212, 160, 165, 0.3);
+
+        p {
+          font-weight: 600;
+          color: $color-accent-dark;
+        }
+      }
+    }
+
+    &__closed {
+      margin-top: 0.4rem;
+      font-style: italic;
+      color: $color-text-subtle !important;
+    }
+
+    &__note {
+      margin-top: 0.4rem;
+      font-size: 0.82rem !important;
+      font-style: italic;
+      color: $color-text-subtle !important;
+    }
+  }
+</style>

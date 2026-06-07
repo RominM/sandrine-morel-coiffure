@@ -1,0 +1,93 @@
+---
+const testimonials = [
+  {
+    name: 'Marie L.',
+    text: 'Sandrine est à l\'écoute, elle a su exactement ce que je voulais. Ma coloration végétale est magnifique, les couleurs tiennent vraiment bien.',
+    stars: 5
+  },
+  {
+    name: 'Isabelle T.',
+    text: 'Un vrai cocon de bien-être. J\'ai adoré l\'ambiance chaleureuse du salon. Je repars toujours avec une coupe qui me va parfaitement.',
+    stars: 5
+  },
+  {
+    name: 'Céline M.',
+    text: 'Enfin une coiffeuse qui prend le temps ! Sandrine est passionnée et ça se voit dans le résultat. Je recommande sans hésiter.',
+    stars: 5
+  },
+]
+---
+
+<section class="testimonials" id="temoignages">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-divider"></span>
+      <h2 class="section-title">Ce que disent mes clientes</h2>
+      <p class="section-subtitle">
+        La satisfaction de mes clientes est ma plus belle récompense.
+      </p>
+    </div>
+
+    <div class="testimonials__grid">
+      {testimonials.map(t => (
+        <div class="testimonials__card">
+          <p class="testimonials__stars" aria-label={`${t.stars} étoiles`}>
+            {'★'.repeat(t.stars)}
+          </p>
+          <blockquote class="testimonials__text">« {t.text} »</blockquote>
+          <p class="testimonials__name">{t.name}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/foundations' as *;
+
+  .testimonials {
+    background: $color-accent-bg;
+    padding-block: $section-padding;
+
+    &__grid {
+      display: grid;
+      gap: 1.5rem;
+
+      @include respond-to('md') {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    &__card {
+      background: white;
+      border-radius: $radius-lg;
+      padding: 2rem;
+      box-shadow: $shadow-sm;
+      border: 1px solid $color-border;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    &__stars {
+      color: $color-secondary;
+      font-size: 1.05rem;
+      letter-spacing: 0.1em;
+    }
+
+    &__text {
+      font-size: 0.95rem;
+      color: $color-text-muted;
+      line-height: 1.75;
+      font-style: italic;
+      flex-grow: 1;
+      margin: 0;
+    }
+
+    &__name {
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: $color-text;
+    }
+  }
+</style>
