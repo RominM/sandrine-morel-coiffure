@@ -1,6 +1,10 @@
 @use 'reset';
 @use 'foundations' as *;
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   background-color: $color-bg;
   color: $color-text;
